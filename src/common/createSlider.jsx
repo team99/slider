@@ -201,6 +201,11 @@ export default function createSlider(Component) {
       }
     }
 
+    onClickMarkLabel = (e, value) => {
+      e.stopPropagation();
+      this.onChange({ value });
+    }
+
     focus() {
       if (!this.props.disabled) {
         this.handlesRefs[0].focus();
@@ -323,6 +328,7 @@ export default function createSlider(Component) {
             className={`${prefixCls}-mark`}
             vertical={vertical}
             marks={marks}
+            onClickLabel={disabled ? noop : this.onClickMarkLabel}
             included={included}
             lowerBound={this.getLowerBound()}
             upperBound={this.getUpperBound()}
